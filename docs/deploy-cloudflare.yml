@@ -76,6 +76,16 @@ jobs:
             -H "Content-Type: application/json" \
             --data '{"name":"game.gzhlaker.cc.cd"}'
 
+      - name: Ensure DNS record (best effort)
+        if: steps.check.outputs.skip == 'false'
+        continue-on-error: true
+        run: |
+          curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/5477ca7011a818a952bbcae638a65572/dns_records" \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"type":"CNAME","name":"game.gzhlaker.cc.cd","content":"gzhlaker-arcade.pages.dev","proxied":true}'
+
       - name: Summary
         if: steps.check.outputs.skip == 'false'
         run: |
