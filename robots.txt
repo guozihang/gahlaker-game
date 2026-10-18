@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arcade.gzhlaker.cc.cd/sitemap.xml
+Sitemap: https://game.gzhlaker.cc.cd/sitemap.xml

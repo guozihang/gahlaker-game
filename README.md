@@ -12,8 +12,8 @@
 ![游戏播放器](docs/player.jpg)
 ![手机游戏库](docs/mobile.jpg)
 
-- **线上地址**：<https://arcade.gzhlaker.cc.cd/>（Cloudflare Pages 自定义域名）
-- **备用地址**：Cloudflare Pages 项目域名 `gzhlaker-arcade.pages.dev`（部署后可用）
+- **线上地址（GitHub Actions 部署完成后）**：<https://game.gzhlaker.cc.cd/>（Cloudflare Pages 自定义域名）
+- **Pages 项目域名（部署后可用）**：<https://gzhlaker-arcade.pages.dev>
 - **源码**：<https://github.com/guozihang/gahlaker-game>
 
 ## 它是什么
@@ -134,7 +134,59 @@ frame-src 'self' https://*.gzhlaker.cc.cd https://your-new-domain.example;
 
 ## 部署到 Cloudflare Pages
 
-### 首次
+站点是纯静态文件，构建产物是 `dist/`。推荐用仓库里的 GitHub Actions 部署，不依赖本地 Wrangler 登录。
+
+### 方式 A：GitHub Actions（推荐）
+
+#### 1. 创建 Cloudflare API Token
+
+Cloudflare Dashboard → 右上角头像 → **My Profile → API Tokens → Create Token**，使用自定义模板，权限至少：
+
+- **Account → Cloudflare Pages → Edit**
+- **Account → Account Settings → Read**（可选，方便确认账户）
+- **Zone → DNS → Edit**（想让我在 workflow 里自动绑定 `game.gzhlaker.cc.cd` 时需要）
+
+Account Resources 选择你的账户；Zone Resources 选择 `gzhlaker.cc.cd`（如果给了 DNS 权限）。
+
+#### 2. 添加 GitHub Actions Secrets
+
+GitHub 仓库 → **Settings → Secrets and variables → Actions → New repository secret**：
+
+- `CLOUDFLARE_API_TOKEN`：上一步创建的 token
+- `CLOUDFLARE_ACCOUNT_ID`：Cloudflare Dashboard 右侧 / Workers & Pages 概览里可以找到
+
+#### 3. 运行 workflow
+
+仓库 → **Actions → Deploy to Cloudflare Pages → Run workflow**。
+
+workflow 会：
+
+1. `npm ci`
+2. `npm run build`
+3. 尝试创建 `gzhlaker-arcade` Pages 项目（已存在则忽略）
+4. `wrangler pages deploy dist --project-name=gzhlaker-arcade --branch=main`
+5. 尝试把 `game.gzhlaker.cc.cd` 绑定为自定义域名
+
+如果 secrets 还没配，workflow 会显示一条 notice 并跳过部署，不会报红。
+
+> 如果 GitHub OAuth token 没有 `workflow` 权限，无法直接推送 `.github/workflows/` 文件。可以在本地终端执行 `gh auth refresh -s workflow` 后重新推送，或者把 `docs/deploy-cloudflare.yml` 的内容复制到 GitHub 网页端的 `.github/workflows/deploy-cloudflare.yml`。
+
+#### 4. 自定义域名
+
+Workflow 会尽力调用 Pages API 添加 `game.gzhlaker.cc.cd`。如果它在 Cloudflare 侧显示 pending，去：
+
+**Workers & Pages → gzhlaker-arcade → Custom domains → Set up a custom domain**
+
+添加 `game.gzhlaker.cc.cd`。DNS 在同一账户时 Cloudflare 会自动建 CNAME；手动建也可以：
+
+```text
+类型: CNAME
+名称: game
+目标: gzhlaker-arcade.pages.dev
+代理: 已代理（橙色云）
+```
+
+### 方式 B：本地 Wrangler
 
 ```bash
 npm install
@@ -143,46 +195,11 @@ npx wrangler pages project create gzhlaker-arcade --production-branch=main
 npm run deploy
 ```
 
-`npm run deploy` 会：
-
-1. `npm run build` 生成 `dist/`（只包含静态文件）
-2. `wrangler pages deploy dist --project-name=gzhlaker-arcade`
-
-部署完成后会得到 `https://gzhlaker-arcade.pages.dev`。
-
-### 绑定自定义域名
-
-在 Cloudflare Dashboard → Workers & Pages → `gzhlaker-arcade` → **Custom domains** 添加：
-
-```text
-arcade.gzhlaker.cc.cd
-```
-
-如果 DNS 在同一账户，Cloudflare 会自动创建 CNAME；手动创建也可以：
-
-```text
-类型: CNAME
-名称: arcade
-目标: gzhlaker-arcade.pages.dev
-代理: 已代理（橙色云）
-```
-
-绑定后，`assets/og.jpg`、`robots.txt`、`sitemap.xml` 里的域名都使用 `arcade.gzhlaker.cc.cd`。
+`npm run deploy` = `npm run build` + `wrangler pages deploy dist --project-name=gzhlaker-arcade`。
 
 ### 后续更新
 
-```bash
-npm run deploy
-```
-
-### 可选：GitHub Actions 部署
-
-仓库里附带了一份手动触发的示例工作流 `docs/deploy-cloudflare.yml`（放在 `docs/` 是为了避免默认 OAuth token 的 workflow scope 限制）。想用 CI 的话，把它复制到 `.github/workflows/`，并在 GitHub 仓库的 **Settings → Secrets and variables → Actions** 中添加：
-
-- `CLOUDFLARE_API_TOKEN`：权限包含 `Account → Cloudflare Pages → Edit`
-- `CLOUDFLARE_ACCOUNT_ID`：Cloudflare 账户 ID
-
-然后在 Actions 页面手动运行 “Deploy to Cloudflare Pages”。
+Secrets 配好后，推到 `main` 会自动触发 workflow（只监听站点文件变化）；也可以在 Actions 页面手动运行。本地部署则执行 `npm run deploy`。
 
 ## 配置备忘
 
