@@ -12,8 +12,8 @@
 ![游戏播放器](docs/player.jpg)
 ![手机游戏库](docs/mobile.jpg)
 
-- **线上地址（GitHub Actions 部署完成后）**：<https://game.gzhlaker.cc.cd/>（Cloudflare Pages 自定义域名）
-- **Pages 项目域名（部署后可用）**：<https://gzhlaker-arcade.pages.dev>
+- **当前可访问（GitHub Actions 已部署）**：<https://gzhlaker-arcade.pages.dev/>
+- **自定义域名（待 DNS 生效）**：<https://game.gzhlaker.cc.cd/>
 - **源码**：<https://github.com/guozihang/gahlaker-game>
 
 ## 它是什么
@@ -169,15 +169,13 @@ workflow 会：
 
 如果 secrets 还没配，workflow 会显示一条 notice 并跳过部署，不会报红。
 
-> 如果 GitHub OAuth token 没有 `workflow` 权限，无法直接推送 `.github/workflows/` 文件。可以在本地终端执行 `gh auth refresh -s workflow` 后重新推送，或者把 `docs/deploy-cloudflare.yml` 的内容复制到 GitHub 网页端的 `.github/workflows/deploy-cloudflare.yml`。
-
 #### 4. 自定义域名
 
 Workflow 会尽力调用 Pages API 添加 `game.gzhlaker.cc.cd`。如果它在 Cloudflare 侧显示 pending，去：
 
 **Workers & Pages → gzhlaker-arcade → Custom domains → Set up a custom domain**
 
-添加 `game.gzhlaker.cc.cd`。DNS 在同一账户时 Cloudflare 会自动建 CNAME；手动建也可以：
+添加 `game.gzhlaker.cc.cd`。如果 workflow 使用的 API Token 同时有 **Zone → DNS → Edit**，workflow 里的 `Ensure DNS record` 步骤会自动创建 CNAME；否则 Pages 只会把域名挂到项目上，需要手动建 DNS：
 
 ```text
 类型: CNAME
