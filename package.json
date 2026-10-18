@@ -1,0 +1,19 @@
+{
+  "name": "gahlaker-arcade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gahlaker Arcade — 十款小游戏，一个入口。",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "build": "rm -rf dist && mkdir -p dist && cp -R index.html assets _headers robots.txt sitemap.xml 404.html dist/ && touch dist/.nojekyll",
+    "preview": "npm run build && npx wrangler pages dev dist --port=8788",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=gzhlaker-arcade"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gahlaker Arcade · 小游戏厅</title>
+  <meta name="description" content="Gahlaker Arcade 是一个人的小游戏合辑：十款即点即玩的小游戏，一个干净的入口。每个游戏独立运行，互不打扰。">
+  <meta name="theme-color" content="#f2eee3">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gahlaker Arcade">
+  <meta property="og:title" content="Gahlaker Arcade · 把无聊的时间通关掉">
+  <meta property="og:description" content="十款小游戏，一个入口。点开就玩，关掉就忘。">
+  <meta property="og:url" content="https://arcade.gzhlaker.cc.cd/">
+  <meta property="og:image" content="https://arcade.gzhlaker.cc.cd/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gahlaker Arcade · 把无聊的时间通关掉">
+  <meta name="twitter:description" content="十款小游戏，一个入口。点开就玩，关掉就忘。">
+  <meta name="twitter:image" content="https://arcade.gzhlaker.cc.cd/assets/og.jpg">
+  <link rel="canonical" href="https://arcade.gzhlaker.cc.cd/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body id="top">
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H4M10 6l-6 6 6 6"/></symbol>
+    <symbol id="i-die" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.5" cy="8.5" r="1.35" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.35" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.35" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.3 2.65 5.37 5.93.86-4.29 4.18 1.01 5.9L12 16.82l-5.3 2.79 1.01-5.9-4.29-4.18 5.93-.86L12 3.3Z"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></symbol>
+    <symbol id="i-collapse" viewBox="0 0 24 24"><path d="M3 8h5V3M21 8h-5V3M3 16h5v5M21 16h-5v5"/></symbol>
+    <symbol id="i-restart" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 1-2.34-5.66M20 4v7h-7"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4 10 14M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.1"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2c.7 5.9 4.1 9.3 10 10-5.9.7-9.3 4.1-10 10-.7-5.9-4.1-9.3-10-10 5.9-.7 9.3-4.1 10-10Z" fill="currentColor" stroke="none"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#games">跳到游戏库</a>
+
+  <div class="lobby" id="lobby-view">
+    <header class="site-header" id="site-header">
+      <div class="header-inner wrap">
+        <a class="brand" href="#/" aria-label="Gahlaker Arcade 首页">
+          <span class="brand-mark" aria-hidden="true"><span>G</span></span>
+          <span class="brand-word">GAHLAKER<small>ARCADE</small></span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="#games">游戏库</a>
+          <a href="#about">关于</a>
+          <a class="nav-github" href="https://github.com/guozihang/gahlaker-game" target="_blank" rel="noopener">GitHub <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </nav>
+        <button class="header-random" type="button" data-random>
+          <span>随便玩</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-die"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>PERSONAL ARCADE <span class="eyebrow-slash">/</span> 2021—2026</p>
+          <h1 id="hero-title">把无聊的时间<br><span class="serif">通关</span>掉。</h1>
+          <p class="lede">十款小游戏，一个入口。点开就玩，关掉就忘。每个游戏都住在自己的域名里，互不打扰。</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" data-random>
+              随机开一局
+              <svg class="icon" aria-hidden="true"><use href="#i-die"/></svg>
+            </button>
+            <a class="btn btn-ghost" href="#games">
+              浏览游戏库
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+            </a>
+          </div>
+          <dl class="hero-meta">
+            <div><dt id="game-count">10</dt><dd>款游戏</dd></div>
+            <div><dt>0</dt><dd>次安装</dd></div>
+            <div><dt>100%</dt><dd>独立运行</dd></div>
+          </dl>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <span class="hero-glow"></span>
+          <div class="hero-card card-a"><img src="assets/covers/huaqiang.webp" alt="" width="800" height="600" fetchpriority="high"></div>
+          <div class="hero-card card-b"><img src="assets/covers/iwanna.webp" alt="" width="800" height="600"></div>
+          <div class="hero-card card-c"><img src="assets/covers/forest.webp" alt="" width="800" height="600"></div>
+          <span class="sticker sticker-a">NO LOGIN</span>
+          <span class="sticker sticker-b">JUST PLAY <svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span>
+          <span class="hero-spark"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span>
+          <span class="hero-caption">EST. 2021 · 10 WORLDS</span>
+        </div>
+      </section>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>NO DOWNLOADS <i>✦</i> NO LOGIN <i>✦</i> 10 WORLDS <i>✦</i> PLAY SOMETHING SMALL <i>✦</i> ONE DOOR <i>✦</i> ZERO INSTALLS <i>✦</i></span>
+          <span>NO DOWNLOADS <i>✦</i> NO LOGIN <i>✦</i> 10 WORLDS <i>✦</i> PLAY SOMETHING SMALL <i>✦</i> ONE DOOR <i>✦</i> ZERO INSTALLS <i>✦</i></span>
+        </div>
+      </div>
+
+      <section class="library wrap" id="games" aria-labelledby="library-title">
+        <header class="section-head">
+          <div class="section-title">
+            <span class="section-index">01</span>
+            <h2 id="library-title">游戏库</h2>
+          </div>
+          <p>挑一个，马上开始。进度和存档都留在游戏自己家里。</p>
+        </header>
+
+        <div class="library-tools">
+          <label class="search" for="search">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="search" id="search" placeholder="搜索游戏、类型或关键词…" autocomplete="off" spellcheck="false">
+            <kbd aria-hidden="true">/</kbd>
+          </label>
+          <div class="filters" id="filters" role="group" aria-label="按类型筛选"></div>
+        </div>
+
+        <div class="library-meta">
+          <p id="result-count" aria-live="polite">共 10 款游戏</p>
+          <button class="clear-filters" type="button" id="clear-filters" hidden>清除筛选 <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+
+        <div class="game-grid" id="game-grid"></div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <span class="empty-mark" aria-hidden="true">?</span>
+          <h3>没有找到这款游戏</h3>
+          <p>换个关键词，或者把所有筛选都关掉再看看。</p>
+          <button class="btn btn-primary" type="button" id="empty-reset">重置筛选</button>
+        </div>
+      </section>
+
+      <section class="about" id="about" aria-labelledby="about-title">
+        <span class="about-star" aria-hidden="true"><svg class="icon"><use href="#i-spark"/></svg></span>
+        <div class="wrap about-grid">
+          <div class="about-head">
+            <span class="section-index">02</span>
+            <h2 id="about-title">一个入口，<br>十个世界。</h2>
+          </div>
+          <div class="about-copy">
+            <p class="about-lede">这里没有下载、没有登录、没有排行榜。只有一堆做完的、没做完的、认真做的和玩票的小游戏。</p>
+            <div class="features">
+              <div><span>01</span><div class="feature-copy"><h3>即点即玩</h3><p>浏览器打开就能玩，不需要安装任何东西。点一下封面，游戏就开始了。</p></div></div>
+              <div><span>02</span><div class="feature-copy"><h3>各自独立</h3><p>每个游戏都在自己的域名和 iframe 里运行，脚本、样式、计时器和存档互不干扰。关掉就彻底结束。</p></div></div>
+              <div><span>03</span><div class="feature-copy"><h3>进度留在原地</h3><p>存档保存在各自的游戏里。本站只在你的浏览器里记一下“玩过”，不收集任何数据。</p></div></div>
+            </div>
+            <button class="btn btn-light" type="button" data-random>随便挑一个 <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-top">
+        <div class="footer-brand">GAHLAKER<span>ARCADE · 小游戏合辑</span></div>
+        <div class="footer-links">
+          <div><h4>入口</h4><a href="#games">游戏库</a><a href="#about">关于</a></div>
+          <div><h4>别处</h4><a href="https://github.com/guozihang/gahlaker-game" target="_blank" rel="noopener">GitHub ↗</a><a href="https://bibclean.gzhlaker.cc.cd/" target="_blank" rel="noopener">BibClean 工具 ↗</a></div>
+        </div>
+      </div>
+      <div class="wrap footer-bottom">
+        <p>© 2026 GAHLAKER ARCADE · 游戏版权归各自作者所有</p>
+        <p>MADE FOR THE FUN OF IT · <a href="#top">回到顶部 ↑</a></p>
+      </div>
+    </footer>
+  </div>
+
+  <section class="player" id="player-view" hidden aria-label="游戏播放器">
+    <header class="player-bar">
+      <button class="player-back" type="button" id="player-back" aria-label="返回游戏库">
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+        <span>大厅</span>
+      </button>
+      <div class="player-heading">
+        <span class="player-dot" id="player-dot" aria-hidden="true"></span>
+        <div>
+          <p class="player-kicker">NOW PLAYING · <span id="player-index">01</span> / <span id="player-total">10</span></p>
+          <h2 id="player-title">游戏</h2>
+        </div>
+      </div>
+      <div class="player-tools">
+        <button class="tool" type="button" id="player-info" aria-label="游戏信息与操作">
+          <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>信息</span>
+        </button>
+        <a class="tool tool-external" id="player-open" href="#" target="_blank" rel="noopener" aria-label="在新标签页打开游戏">
+          <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg><span>新标签</span>
+        </a>
+        <button class="tool" type="button" id="player-restart" aria-label="重新开始游戏">
+          <svg class="icon" aria-hidden="true"><use href="#i-restart"/></svg><span>重开</span>
+        </button>
+        <button class="tool" type="button" id="player-fullscreen" aria-label="全屏">
+          <svg class="icon" aria-hidden="true"><use href="#i-expand"/></svg><span>全屏</span>
+        </button>
+      </div>
+    </header>
+    <div class="player-stage" id="player-stage">
+      <div class="game-loader" id="game-loader">
+        <div class="loader-backdrop" id="loader-backdrop"></div>
+        <div class="loader-card">
+          <p class="loader-kicker">LOADING GAME</p>
+          <h3 id="loader-title">游戏</h3>
+          <p class="loader-controls" id="loader-controls">键鼠操作</p>
+          <div class="loader-bar" aria-hidden="true"><i></i></div>
+          <p class="loader-hint" id="loader-hint">第一次加载可能需要几秒钟。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="game-dialog" id="game-dialog" aria-labelledby="dialog-title">
+    <form method="dialog" class="dialog-close-form">
+      <button class="dialog-close" type="submit" aria-label="关闭游戏信息">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </form>
+    <div class="dialog-body">
+      <div class="dialog-cover"><img id="dialog-cover" alt=""></div>
+      <div class="dialog-content">
+        <p class="dialog-kicker">GAME INFO <span id="dialog-number">01</span></p>
+        <h2 id="dialog-title">游戏</h2>
+        <p class="dialog-sub" id="dialog-sub"></p>
+        <p class="dialog-description" id="dialog-description"></p>
+        <dl class="dialog-facts">
+          <div><dt>操作</dt><dd id="dialog-controls"></dd></div>
+          <div><dt>类型</dt><dd id="dialog-tags"></dd></div>
+          <div><dt>地址</dt><dd><a id="dialog-url" href="#" target="_blank" rel="noopener"></a></dd></div>
+        </dl>
+        <div class="dialog-actions">
+          <button class="btn btn-primary" type="button" id="dialog-play">回到游戏 <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></button>
+          <button class="btn btn-ghost" type="button" id="dialog-fav"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><span id="dialog-fav-label">收藏</span></button>
+        </div>
+        <p class="dialog-note">打开说明时，游戏不会暂停。</p>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
